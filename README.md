@@ -92,7 +92,7 @@ The same architecture could potentially be adapted for:
 - Agricultural storage monitoring
 
 Additional sensors such as **soil moisture, light, rainfall, or gas sensors** could also be integrated in future versions.
-
+Alongwith a cloud based notification system via Telegram (Toit programs will be used ) 'UNDER UPDATE'
 > FieldGuard is a student engineering proof-of-concept and not a commercially deployed agricultural monitoring system.
 
 ---
