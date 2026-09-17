@@ -7,8 +7,7 @@ FieldGuard is a student-built AgriTech IoT prototype for distributed environment
 The prototype was developed by **Team Alpha during IoT Summer Camp Bremen 2026**. The goal was to explore how multiple sensing zones can communicate environmental conditions over long-range wireless links to a central monitoring unit.
 
 🌐 **Interactive Project Website:**  
-[Add GitHub Pages link here after deployment]
-
+https://aaushh2705.github.io/fieldguard-agritech-iot/
 ---
 
 ## 🌱 The Idea
