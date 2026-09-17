@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+          content="FieldGuard - a three-zone agricultural IoT monitoring prototype using ESP32, DHT11 sensors and LoRa communication.">
+
+    <title>FieldGuard | Agricultural IoT Monitoring</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- =====================================================
+     NAVIGATION
+===================================================== -->
+
+<nav class="navbar">
+
+    <a href="#home" class="logo">
+        FIELDGUARD<span>.</span>
+    </a>
+
+    <div class="nav-links">
+        <a href="#problem">Problem</a>
+        <a href="#demo">Live Demo</a>
+        <a href="#architecture">System</a>
+        <a href="#applications">Applications</a>
+        <a href="#prototype">Prototype</a>
+    </div>
+
+</nav>
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<header id="home" class="hero">
+
+    <div class="hero-content">
+
+        <p class="eyebrow">
+            AGRITECH IoT / DISTRIBUTED ENVIRONMENTAL MONITORING
+        </p>
+
+        <h1>
+            Three zones.<br>
+            <span>One watchful field.</span>
+        </h1>
+
+        <p class="hero-description">
+            FieldGuard is a student-built proof-of-concept for distributed
+            environmental monitoring using ESP32-based sensing and
+            long-range LoRa communication.
+        </p>
+
+        <div class="hero-buttons">
+
+            <a href="#demo" class="button primary">
+                Explore Live Demo
+            </a>
+
+            <a href="#architecture" class="button secondary">
+                How It Works
+            </a>
+
+        </div>
+
+
+        <div class="hero-stats">
+
+            <div class="stat">
+                <strong>3</strong>
+                <span>Sensing zones</span>
+            </div>
+
+            <div class="stat">
+                <strong>868 MHz</strong>
+                <span>LoRa communication</span>
+            </div>
+
+            <div class="stat">
+                <strong>ESP32</strong>
+                <span>Embedded platform</span>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <figure class="hero-photo">
+
+        <img
+            src="assets/images/fieldguard-hero.jpeg"
+            alt="FieldGuard three-zone agricultural IoT prototype"
+        >
+
+        <figcaption class="photo-caption">
+
+            <span>FIELDGUARD / PROTOTYPE</span>
+
+            <span>BREMEN · 2026</span>
+
+        </figcaption>
+
+    </figure>
+
+</header>
+
+
+<!-- =====================================================
+     PROJECT IDENTITY / LOGOS
+===================================================== -->
+
+<section class="identity-strip">
+
+    <div class="identity-text">
+
+        <span class="tiny-label">
+            DEVELOPED DURING
+        </span>
+
+        <strong>
+            IoT Summer Camp Bremen 2026
+        </strong>
+
+        <p>
+            Student engineering prototype · Team Alpha
+        </p>
+
+    </div>
+
+
+    <div class="identity-logos">
+
+        <div class="logo-box">
+            <img
+                src="assets/logos/uni-bremen.png"
+                alt="University of Bremen"
+            >
+        </div>
+
+        <div class="logo-divider"></div>
+
+        <div class="logo-box summer-logo">
+            <img
+                src="assets/logos/iot-summercamp.png"
+                alt="IoT Summer Camp Bremen"
+            >
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     PROBLEM
+===================================================== -->
+
+<section id="problem" class="section problem-section">
+
+    <div class="section-header">
+
+        <p class="section-number">
+            01 / THE PROBLEM
+        </p>
+
+        <h2>
+            Knowing something changed
+            isn't enough.
+            <span>We need to know where.</span>
+        </h2>
+
+    </div>
+
+
+    <div class="problem-content">
+
+        <p>
+            Environmental conditions can vary between different areas of
+            a field, greenhouse or agricultural environment.
+        </p>
+
+        <p>
+            A single measurement cannot describe every location.
+            FieldGuard explores a distributed approach in which independent
+            sensing zones report their environmental conditions to a
+            central receiver.
+        </p>
+
+        <p>
+            LoRa communication allows the concept to operate without
+            depending on conventional Wi-Fi infrastructure between the
+            sensing and receiving units.
+        </p>
+
+        <div class="problem-tag">
+            SENSE → IDENTIFY → TRANSMIT → RESPOND
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     LIVE SIMULATION
+===================================================== -->
+
+<section id="demo" class="section demo-section">
+
+    <div class="section-header">
+
+        <p class="section-number">
+            02 / LIVE FIELD SIMULATION
+        </p>
+
+        <h2>
+            Change the field.<br>
+            <span>Watch the system react.</span>
+        </h2>
+
+        <p class="section-intro">
+            This browser simulation demonstrates the temperature-based
+            alert logic used in the FieldGuard prototype. Adjust each
+            zone independently.
+        </p>
+
+    </div>
+
+
+    <div class="zone-grid">
+
+        <!-- ZONE 1 -->
+
+        <article class="zone-card">
+
+            <div class="zone-top">
+
+                <span class="node">
+                    ZONE 01
+                </span>
+
+                <span class="node-online">
+                    ● ONLINE
+                </span>
+
+            </div>
+
+
+            <div class="temperature">
+                <span id="temp1">22</span><small>°C</small>
+            </div>
+
+
+            <div id="status1" class="status normal">
+                NORMAL
+            </div>
+
+
+            <div class="slider-area">
+
+                <div class="slider-labels">
+                    <span>15°C</span>
+                    <span>40°C</span>
+                </div>
+
+                <input
+                    id="slider1"
+                    type="range"
+                    min="15"
+                    max="40"
+                    value="22"
+                    oninput="updateZone(1)"
+                >
+
+            </div>
+
+        </article>
+
+
+        <!-- ZONE 2 -->
+
+        <article class="zone-card">
+
+            <div class="zone-top">
+
+                <span class="node">
+                    ZONE 02
+                </span>
+
+                <span class="node-online">
+                    ● ONLINE
+                </span>
+
+            </div>
+
+
+            <div class="temperature">
+                <span id="temp2">27</span><small>°C</small>
+            </div>
+
+
+            <div id="status2" class="status warning">
+                WARNING
+            </div>
+
+
+            <div class="slider-area">
+
+                <div class="slider-labels">
+                    <span>15°C</span>
+                    <span>40°C</span>
+                </div>
+
+                <input
+                    id="slider2"
+                    type="range"
+                    min="15"
+                    max="40"
+                    value="27"
+                    oninput="updateZone(2)"
+                >
+
+            </div>
+
+        </article>
+
+
+        <!-- ZONE 3 -->
+
+        <article class="zone-card">
+
+            <div class="zone-top">
+
+                <span class="node">
+                    ZONE 03
+                </span>
+
+                <span class="node-online">
+                    ● ONLINE
+                </span>
+
+            </div>
+
+
+            <div class="temperature">
+                <span id="temp3">32</span><small>°C</small>
+            </div>
+
+
+            <div id="status3" class="status critical">
+                CRITICAL
+            </div>
+
+
+            <div class="slider-area">
+
+                <div class="slider-labels">
+                    <span>15°C</span>
+                    <span>40°C</span>
+                </div>
+
+                <input
+                    id="slider3"
+                    type="range"
+                    min="15"
+                    max="40"
+                    value="32"
+                    oninput="updateZone(3)"
+                >
+
+            </div>
+
+        </article>
+
+    </div>
+
+
+    <!-- RECEIVER -->
+
+    <div class="receiver">
+
+        <div class="receiver-information">
+
+            <span class="receiver-label">
+                FIELDGUARD / CENTRAL RECEIVER
+            </span>
+
+            <h3 id="receiverStatus">
+                CRITICAL CONDITION
+            </h3>
+
+            <p id="receiverMessage">
+                Attention required in Zone 3.
+            </p>
+
+        </div>
+
+
+        <div class="receiver-radio">
+
+            <div class="signal-icon">
+                )))
+            </div>
+
+            <strong>
+                LoRa
+            </strong>
+
+            <span>
+                868 MHz
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <div class="thresholds">
+
+        <span>
+            <b class="normal-dot"></b>
+            NORMAL &lt; 25°C
+        </span>
+
+        <span>
+            <b class="warning-dot"></b>
+            WARNING 25–29°C
+        </span>
+
+        <span>
+            <b class="critical-dot"></b>
+            CRITICAL ≥ 30°C
+        </span>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     ARCHITECTURE
+===================================================== -->
+
+<section id="architecture" class="section architecture-section">
+
+    <div class="section-header">
+
+        <p class="section-number">
+            03 / SYSTEM ARCHITECTURE
+        </p>
+
+        <h2>
+            From measurement<br>
+            <span>to local awareness.</span>
+        </h2>
+
+        <p class="section-intro">
+            FieldGuard connects sensing, embedded processing,
+            long-range wireless communication and local alerts
+            into one prototype system.
+        </p>
+
+    </div>
+
+
+    <div class="architecture-flow">
+
+        <article class="architecture-card">
+
+            <span class="architecture-number">
+                01
+            </span>
+
+            <div class="architecture-icon">
+                ◉
+            </div>
+
+            <h3>
+                Sense
+            </h3>
+
+            <strong>
+                3 × DHT11
+            </strong>
+
+            <p>
+                Independent temperature and humidity sensing
+                across three monitored zones.
+            </p>
+
+        </article>
+
+
+        <div class="architecture-arrow">
+            →
+        </div>
+
+
+        <article class="architecture-card">
+
+            <span class="architecture-number">
+                02
+            </span>
+
+            <div class="architecture-icon">
+                ▣
+            </div>
+
+            <h3>
+                Process
+            </h3>
+
+            <strong>
+                ESP32 / MoleNet
+            </strong>
+
+            <p>
+                Sensor readings are processed and associated
+                with their respective monitoring zone.
+            </p>
+
+        </article>
+
+
+        <div class="architecture-arrow">
+            →
+        </div>
+
+
+        <article class="architecture-card">
+
+            <span class="architecture-number">
+                03
+            </span>
+
+            <div class="architecture-icon">
+                )))
+            </div>
+
+            <h3>
+                Transmit
+            </h3>
+
+            <strong>
+                SX127x LoRa
+            </strong>
+
+            <p>
+                Wireless communication at 868 MHz transfers
+                the monitored information to the receiver.
+            </p>
+
+        </article>
+
+
+        <div class="architecture-arrow">
+            →
+        </div>
+
+
+        <article class="architecture-card">
+
+            <span class="architecture-number">
+                04
+            </span>
+
+            <div class="architecture-icon">
+                !
+            </div>
+
+            <h3>
+                Respond
+            </h3>
+
+            <strong>
+                Receiver
+            </strong>
+
+            <p>
+                LCD, LED and buzzer feedback communicate
+                the current condition and affected zone.
+            </p>
+
+        </article>
+
+    </div>
+
+
+    <div class="radio-specifications">
+
+        <div>
+            <span>FREQUENCY</span>
+            <strong>868 MHz</strong>
+        </div>
+
+        <div>
+            <span>BANDWIDTH</span>
+            <strong>125 kHz</strong>
+        </div>
+
+        <div>
+            <span>SPREADING FACTOR</span>
+            <strong>SF9</strong>
+        </div>
+
+        <div>
+            <span>CRC</span>
+            <strong>Enabled</strong>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     APPLICATIONS
+===================================================== -->
+
+<section id="applications" class="section applications-section">
+
+    <div class="section-header">
+
+        <p class="section-number">
+            04 / POTENTIAL APPLICATIONS
+        </p>
+
+        <h2>
+            One architecture.<br>
+            <span>Different environments.</span>
+        </h2>
+
+        <p class="section-intro">
+            FieldGuard demonstrates temperature and humidity monitoring.
+            The underlying distributed architecture could be adapted to
+            different agricultural environments and additional sensors.
+        </p>
+
+    </div>
+
+
+    <div class="application-grid">
+
+        <article class="application-card">
+
+            <span class="application-number">
+                01
+            </span>
+
+            <div>
+
+                <h3>
+                    Greenhouses
+                </h3>
+
+                <p>
+                    Monitor separate growing zones and identify
+                    localized environmental changes.
+                </p>
+
+            </div>
+
+        </article>
+
+
+        <article class="application-card">
+
+            <span class="application-number">
+                02
+            </span>
+
+            <div>
+
+                <h3>
+                    Remote Fields
+                </h3>
+
+                <p>
+                    Explore long-range environmental sensing in
+                    areas where conventional Wi-Fi may be impractical.
+                </p>
+
+            </div>
+
+        </article>
+
+
+        <article class="application-card">
+
+            <span class="application-number">
+                03
+            </span>
+
+            <div>
+
+                <h3>
+                    Livestock & Barns
+                </h3>
+
+                <p>
+                    Extend distributed environmental awareness
+                    across separated livestock or barn areas.
+                </p>
+
+            </div>
+
+        </article>
+
+
+        <article class="application-card">
+
+            <span class="application-number">
+                04
+            </span>
+
+            <div>
+
+                <h3>
+                    Agricultural Storage
+                </h3>
+
+                <p>
+                    Adapt the sensing concept to monitor environmental
+                    conditions in agricultural storage spaces.
+                </p>
+
+            </div>
+
+        </article>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     ENGINEERING / REAL SYSTEM
+===================================================== -->
+
+<section class="section engineering-section">
+
+    <div class="engineering-layout">
+
+        <div class="engineering-content">
+
+            <p class="section-number">
+                05 / ENGINEERING
+            </p>
+
+            <h2>
+                More than<br>
+                <span>a sensor reading.</span>
+            </h2>
+
+
+            <div class="engineering-list">
+
+                <div class="engineering-item">
+
+                    <span>01</span>
+
+                    <div>
+                        <h3>Distributed sensing</h3>
+
+                        <p>
+                            Three physical sensor zones allow the prototype
+                            to distinguish environmental conditions by location.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="engineering-item">
+
+                    <span>02</span>
+
+                    <div>
+                        <h3>Embedded processing</h3>
+
+                        <p>
+                            ESP32-based hardware connects sensor acquisition,
+                            zone logic and wireless communication.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="engineering-item">
+
+                    <span>03</span>
+
+                    <div>
+                        <h3>Long-range communication</h3>
+
+                        <p>
+                            SX127x LoRa modules provide the wireless link
+                            between the sensing system and receiver.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="engineering-item">
+
+                    <span>04</span>
+
+                    <div>
+                        <h3>Condition-based response</h3>
+
+                        <p>
+                            The prototype categorizes temperature conditions
+                            as Normal, Warning or Critical and communicates
+                            the affected zone.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <figure class="engineering-photo">
+
+            <img
+                src="assets/images/fieldguard-system.jpeg"
+                alt="Complete FieldGuard prototype with sensing zones and receiver"
+            >
+
+            <figcaption>
+                COMPLETE PROTOTYPE /
+                SENSING FIELD + LoRa RECEIVER
+            </figcaption>
+
+        </figure>
+
+    </div>
+
+
+    <div class="tech-stack">
+
+        <span>ESP32</span>
+        <span>MoleNet</span>
+        <span>DHT11</span>
+        <span>SX127x</span>
+        <span>LoRa</span>
+        <span>868 MHz</span>
+        <span>SF9</span>
+        <span>Embedded Systems</span>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     REAL PROTOTYPE GALLERY
+===================================================== -->
+
+<section id="prototype" class="section prototype-section">
+
+    <div class="section-header">
+
+        <p class="section-number">
+            06 / THE PROTOTYPE
+        </p>
+
+        <h2>
+            Designed. Built.<br>
+            <span>Tested in Bremen.</span>
+        </h2>
+
+        <p class="section-intro">
+            From the physical sensing setup to the final presentation,
+            FieldGuard was developed as a hands-on student engineering
+            prototype by Team Alpha.
+        </p>
+
+    </div>
+
+
+    <div class="photo-grid">
+
+        <figure class="photo-large">
+
+            <img
+                src="assets/images/fieldguard-system.jpeg"
+                alt="FieldGuard sensing field and receiver system"
+            >
+
+            <figcaption>
+
+                <span>
+                    01 / SYSTEM
+                </span>
+
+                Complete FieldGuard sensing and receiver setup
+
+            </figcaption>
+
+        </figure>
+
+
+        <figure>
+
+            <img
+                src="assets/images/fieldguard-poster.jpeg"
+                alt="FieldGuard project poster"
+            >
+
+            <figcaption>
+
+                <span>
+                    02 / PRESENTATION
+                </span>
+
+                FieldGuard project poster
+
+            </figcaption>
+
+        </figure>
+
+
+        <figure>
+
+            <img
+                src="assets/images/fieldguard-team.jpeg"
+                alt="Team Alpha at IoT Summer Camp Bremen"
+            >
+
+            <figcaption>
+
+                <span>
+                    03 / TEAM ALPHA
+                </span>
+
+                IoT Summer Camp Bremen · 2026
+
+            </figcaption>
+
+        </figure>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     TEAM / ORIGIN
+===================================================== -->
+
+<section class="section team-section">
+
+    <div class="team-heading">
+
+        <p class="section-number">
+            07 / PROJECT ORIGIN
+        </p>
+
+        <h2>
+            Built by<br>
+            <span>Team Alpha.</span>
+        </h2>
+
+    </div>
+
+
+    <div class="team-information">
+
+        <p class="team-lead">
+            FieldGuard was developed during the
+            IoT Summer Camp Bremen 2026 as a student
+            proof-of-concept for distributed agricultural
+            environmental monitoring.
+        </p>
+
+        <p>
+            The project combined environmental sensing,
+            embedded systems, LoRa communication and
+            condition-based alerts in one working prototype.
+        </p>
+
+
+        <div class="team-badge">
+
+            <span>
+                PROJECT
+            </span>
+
+            <strong>
+                FIELDGUARD
+            </strong>
+
+            <small>
+                TEAM ALPHA · BREMEN · 2026
+            </small>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     FINAL CTA
+===================================================== -->
+
+<section class="final-section">
+
+    <p class="eyebrow">
+        FIELDGUARD / AGRITECH IoT
+    </p>
+
+    <h2>
+        Three zones.<br>
+        <span>One watchful field.</span>
+    </h2>
+
+    <p>
+        A student-built exploration of sensing,
+        long-range communication and distributed
+        environmental awareness.
+    </p>
+
+    <a href="#home" class="button primary">
+        Back to Top ↑
+    </a>
+
+</section>
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+    <div class="footer-brand">
+
+        <strong>
+            FIELDGUARD<span>.</span>
+        </strong>
+
+        <p>
+            Agricultural IoT prototype
+        </p>
+
+    </div>
+
+
+    <div class="footer-project">
+
+        <span>
+            Team Alpha
+        </span>
+
+        <span>
+            IoT Summer Camp Bremen 2026
+        </span>
+
+    </div>
+
+
+    <div class="footer-location">
+
+        <span>
+            Bremen, Germany
+        </span>
+
+        <span>
+            2026
+        </span>
+
+    </div>
+
+</footer>
+
+
+<script src="script.js"></script>
+
+</body>
+
+</html>

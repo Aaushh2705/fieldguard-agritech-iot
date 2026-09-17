@@ -1,0 +1,1543 @@
+/* =========================================================
+   FIELDGUARD
+   Agricultural IoT Monitoring Prototype
+   ========================================================= */
+
+
+/* =========================================================
+   01. RESET + GLOBAL
+   ========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: #0b100c;
+    color: #edf2e9;
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+img {
+    max-width: 100%;
+}
+
+::selection {
+    background: #a8df73;
+    color: #0b100c;
+}
+
+
+/* =========================================================
+   02. NAVIGATION
+   ========================================================= */
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 78px;
+
+    padding: 0 6%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    z-index: 1000;
+
+    background: rgba(11, 16, 12, 0.9);
+    backdrop-filter: blur(15px);
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.logo {
+    font-size: 1rem;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+}
+
+.logo span {
+    color: #a8df73;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+
+    font-size: 0.78rem;
+    color: #a7afa4;
+}
+
+.nav-links a {
+    transition: color 0.2s ease;
+}
+
+.nav-links a:hover {
+    color: #a8df73;
+}
+
+
+/* =========================================================
+   03. COMMON TYPOGRAPHY
+   ========================================================= */
+
+.eyebrow,
+.section-number,
+.tiny-label {
+    font-family: monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+
+    color: #a8df73;
+}
+
+.section-number {
+    margin-bottom: 24px;
+}
+
+.section h2,
+.final-section h2 {
+    font-size: clamp(2.9rem, 5.5vw, 5.8rem);
+    line-height: 0.98;
+    letter-spacing: -0.05em;
+}
+
+.section h2 span,
+.final-section h2 span,
+.hero h1 span {
+    color: #737d72;
+}
+
+.section-intro {
+    max-width: 720px;
+
+    margin-top: 28px;
+
+    font-size: 1rem;
+    line-height: 1.8;
+
+    color: #929b90;
+}
+
+
+/* =========================================================
+   04. HERO
+   ========================================================= */
+
+.hero {
+    min-height: 100vh;
+
+    padding: 145px 6% 85px;
+
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: 65px;
+
+    align-items: center;
+
+    background:
+        radial-gradient(
+            circle at 80% 35%,
+            rgba(107, 161, 69, 0.13),
+            transparent 35%
+        ),
+        #0b100c;
+}
+
+.hero-content {
+    max-width: 790px;
+}
+
+.hero .eyebrow {
+    margin-bottom: 24px;
+}
+
+.hero h1 {
+    font-size: clamp(4rem, 7vw, 7.4rem);
+    line-height: 0.9;
+    letter-spacing: -0.06em;
+
+    margin-bottom: 35px;
+}
+
+.hero-description {
+    max-width: 650px;
+
+    font-size: 1.08rem;
+    line-height: 1.8;
+
+    color: #a0a99e;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 14px;
+
+    margin-top: 36px;
+}
+
+
+/* =========================================================
+   05. BUTTONS
+   ========================================================= */
+
+.button {
+    display: inline-block;
+
+    padding: 13px 21px;
+
+    border: 1px solid #a8df73;
+
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.button:hover {
+    transform: translateY(-2px);
+}
+
+.button.primary {
+    background: #a8df73;
+    color: #0b100c;
+}
+
+.button.primary:hover {
+    background: #c4ee9e;
+}
+
+.button.secondary {
+    color: #e1e7dd;
+    background: transparent;
+}
+
+.button.secondary:hover {
+    background: rgba(168, 223, 115, 0.07);
+}
+
+
+/* =========================================================
+   06. HERO STATS
+   ========================================================= */
+
+.hero-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 50px;
+
+    margin-top: 65px;
+}
+
+.stat {
+    display: flex;
+    flex-direction: column;
+}
+
+.stat strong {
+    font-size: 1.45rem;
+    font-weight: 600;
+
+    color: #a8df73;
+}
+
+.stat span {
+    margin-top: 2px;
+
+    font-size: 0.74rem;
+
+    color: #6f796e;
+}
+
+
+/* =========================================================
+   07. HERO PHOTO
+   ========================================================= */
+
+.hero-photo {
+    position: relative;
+
+    overflow: hidden;
+
+    min-width: 0;
+
+    background: #111712;
+
+    border: 1px solid rgba(168, 223, 115, 0.23);
+}
+
+.hero-photo img {
+    width: 100%;
+    height: 620px;
+
+    display: block;
+
+    object-fit: cover;
+
+    transition: transform 0.7s ease;
+}
+
+.hero-photo:hover img {
+    transform: scale(1.015);
+}
+
+.photo-caption {
+    position: absolute;
+
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+
+    padding: 14px 18px;
+
+    background: rgba(7, 11, 8, 0.87);
+    backdrop-filter: blur(8px);
+
+    font-family: monospace;
+    font-size: 0.64rem;
+    letter-spacing: 0.08em;
+
+    color: #a8df73;
+}
+
+
+/* =========================================================
+   08. PROJECT IDENTITY / LOGOS
+   ========================================================= */
+
+.identity-strip {
+    min-height: 150px;
+
+    padding: 32px 6%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 50px;
+
+    background: #eef1e9;
+    color: #111712;
+}
+
+.identity-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.identity-text .tiny-label {
+    color: #55793b;
+}
+
+.identity-text strong {
+    margin-top: 4px;
+
+    font-size: 1.15rem;
+}
+
+.identity-text p {
+    margin-top: 2px;
+
+    font-size: 0.78rem;
+
+    color: #6a7168;
+}
+
+.identity-logos {
+    display: flex;
+    align-items: center;
+
+    gap: 28px;
+}
+
+.logo-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 150px;
+    max-width: 210px;
+}
+
+.logo-box img {
+    display: block;
+
+    width: auto;
+    max-width: 100%;
+    max-height: 62px;
+
+    object-fit: contain;
+}
+
+.summer-logo img {
+    max-height: 72px;
+}
+
+.logo-divider {
+    width: 1px;
+    height: 55px;
+
+    background: rgba(17, 23, 18, 0.16);
+}
+
+
+/* =========================================================
+   09. GENERAL SECTIONS
+   ========================================================= */
+
+.section {
+    padding: 120px 6%;
+
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.section-header {
+    max-width: 1000px;
+}
+
+
+/* =========================================================
+   10. PROBLEM
+   ========================================================= */
+
+.problem-section {
+    display: grid;
+    grid-template-columns: 1.25fr 0.75fr;
+
+    gap: 85px;
+
+    align-items: end;
+}
+
+.problem-content {
+    display: flex;
+    flex-direction: column;
+
+    gap: 23px;
+
+    color: #9aa398;
+}
+
+.problem-content p {
+    max-width: 620px;
+}
+
+.problem-tag {
+    margin-top: 15px;
+
+    padding-top: 20px;
+
+    border-top: 1px solid rgba(168, 223, 115, 0.2);
+
+    font-family: monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+
+    color: #a8df73;
+}
+
+
+/* =========================================================
+   11. LIVE DEMO
+   ========================================================= */
+
+.demo-section {
+    background: #080c09;
+}
+
+.zone-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+
+    gap: 16px;
+
+    margin-top: 60px;
+}
+
+.zone-card {
+    min-width: 0;
+
+    padding: 30px;
+
+    background: #101611;
+
+    border: 1px solid rgba(255, 255, 255, 0.09);
+
+    transition:
+        transform 0.25s ease,
+        border-color 0.25s ease;
+}
+
+.zone-card:hover {
+    transform: translateY(-4px);
+
+    border-color: rgba(168, 223, 115, 0.4);
+}
+
+.zone-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 15px;
+}
+
+.node {
+    font-family: monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+
+    color: #a8df73;
+}
+
+.node-online {
+    font-family: monospace;
+    font-size: 0.62rem;
+
+    color: #687267;
+}
+
+.temperature {
+    margin-top: 50px;
+
+    font-size: clamp(3.5rem, 5vw, 5.3rem);
+    line-height: 1;
+    letter-spacing: -0.05em;
+}
+
+.temperature small {
+    margin-left: 3px;
+
+    font-size: 1.3rem;
+
+    color: #707a70;
+}
+
+
+/* =========================================================
+   12. STATUS BADGES
+   ========================================================= */
+
+.status {
+    display: inline-block;
+
+    margin-top: 22px;
+
+    padding: 6px 12px;
+
+    border-radius: 100px;
+
+    font-family: monospace;
+    font-size: 0.67rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+}
+
+.status.normal {
+    color: #a8df73;
+
+    background: rgba(168, 223, 115, 0.09);
+
+    border: 1px solid rgba(168, 223, 115, 0.25);
+}
+
+.status.warning {
+    color: #edc35a;
+
+    background: rgba(237, 195, 90, 0.09);
+
+    border: 1px solid rgba(237, 195, 90, 0.25);
+}
+
+.status.critical {
+    color: #ef6c64;
+
+    background: rgba(239, 108, 100, 0.09);
+
+    border: 1px solid rgba(239, 108, 100, 0.25);
+}
+
+
+/* =========================================================
+   13. SLIDERS
+   ========================================================= */
+
+.slider-area {
+    margin-top: 45px;
+}
+
+.slider-labels {
+    display: flex;
+    justify-content: space-between;
+
+    margin-bottom: 10px;
+
+    font-family: monospace;
+    font-size: 0.62rem;
+
+    color: #5d675c;
+}
+
+input[type="range"] {
+    width: 100%;
+
+    cursor: pointer;
+
+    accent-color: #a8df73;
+}
+
+
+/* =========================================================
+   14. RECEIVER
+   ========================================================= */
+
+.receiver {
+    margin-top: 18px;
+
+    padding: 32px 35px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 35px;
+
+    background: #101611;
+
+    border: 1px solid rgba(168, 223, 115, 0.27);
+}
+
+.receiver-label {
+    font-family: monospace;
+    font-size: 0.66rem;
+    letter-spacing: 0.13em;
+
+    color: #a8df73;
+}
+
+.receiver h3 {
+    margin-top: 7px;
+
+    font-size: 1.5rem;
+}
+
+.receiver p {
+    margin-top: 3px;
+
+    color: #7e887d;
+}
+
+.receiver-radio {
+    min-width: 120px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.signal-icon {
+    font-family: monospace;
+    font-size: 1.5rem;
+
+    color: #a8df73;
+}
+
+.receiver-radio strong {
+    color: #dfe5db;
+}
+
+.receiver-radio span {
+    font-family: monospace;
+    font-size: 0.67rem;
+
+    color: #697369;
+}
+
+
+/* =========================================================
+   15. THRESHOLDS
+   ========================================================= */
+
+.thresholds {
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 25px;
+
+    margin-top: 18px;
+
+    font-family: monospace;
+    font-size: 0.65rem;
+
+    color: #626b61;
+}
+
+.thresholds span {
+    display: flex;
+    align-items: center;
+
+    gap: 7px;
+}
+
+.thresholds b {
+    width: 7px;
+    height: 7px;
+
+    display: inline-block;
+
+    border-radius: 50%;
+}
+
+.normal-dot {
+    background: #a8df73;
+}
+
+.warning-dot {
+    background: #edc35a;
+}
+
+.critical-dot {
+    background: #ef6c64;
+}
+
+
+/* =========================================================
+   16. ARCHITECTURE
+   ========================================================= */
+
+.architecture-section {
+    background: #111712;
+}
+
+.architecture-flow {
+    margin-top: 65px;
+
+    display: grid;
+    grid-template-columns:
+        minmax(0, 1fr)
+        auto
+        minmax(0, 1fr)
+        auto
+        minmax(0, 1fr)
+        auto
+        minmax(0, 1fr);
+
+    gap: 12px;
+
+    align-items: stretch;
+}
+
+.architecture-card {
+    min-width: 0;
+    min-height: 310px;
+
+    padding: 28px;
+
+    display: flex;
+    flex-direction: column;
+
+    background: #0c110d;
+
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.architecture-number {
+    font-family: monospace;
+    font-size: 0.67rem;
+
+    color: #a8df73;
+}
+
+.architecture-icon {
+    margin-top: 35px;
+
+    min-height: 45px;
+
+    font-family: monospace;
+    font-size: 2rem;
+
+    color: #a8df73;
+}
+
+.architecture-card h3 {
+    margin-top: 20px;
+
+    font-size: 1.5rem;
+}
+
+.architecture-card strong {
+    margin-top: 3px;
+
+    font-family: monospace;
+    font-size: 0.75rem;
+
+    color: #a8df73;
+}
+
+.architecture-card p {
+    margin-top: 18px;
+
+    font-size: 0.86rem;
+    line-height: 1.7;
+
+    color: #818b80;
+}
+
+.architecture-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0 3px;
+
+    font-family: monospace;
+    font-size: 1.5rem;
+
+    color: #a8df73;
+}
+
+
+/* =========================================================
+   17. RADIO SPECS
+   ========================================================= */
+
+.radio-specifications {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+
+    margin-top: 18px;
+
+    border: 1px solid rgba(168, 223, 115, 0.18);
+}
+
+.radio-specifications div {
+    padding: 22px 25px;
+
+    display: flex;
+    flex-direction: column;
+
+    border-right: 1px solid rgba(168, 223, 115, 0.13);
+}
+
+.radio-specifications div:last-child {
+    border-right: none;
+}
+
+.radio-specifications span {
+    font-family: monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.08em;
+
+    color: #657064;
+}
+
+.radio-specifications strong {
+    margin-top: 4px;
+
+    font-size: 1rem;
+    font-weight: 500;
+
+    color: #a8df73;
+}
+
+
+/* =========================================================
+   18. APPLICATIONS
+   ========================================================= */
+
+.applications-section {
+    background: #0b100c;
+}
+
+.application-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 15px;
+
+    margin-top: 60px;
+}
+
+.application-card {
+    min-height: 280px;
+
+    padding: 35px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    background: rgba(255, 255, 255, 0.015);
+
+    border: 1px solid rgba(255, 255, 255, 0.08);
+
+    transition:
+        transform 0.25s ease,
+        border-color 0.25s ease,
+        background 0.25s ease;
+}
+
+.application-card:hover {
+    transform: translateY(-5px);
+
+    border-color: rgba(168, 223, 115, 0.4);
+
+    background: rgba(168, 223, 115, 0.025);
+}
+
+.application-number {
+    font-family: monospace;
+    font-size: 0.7rem;
+
+    color: #a8df73;
+}
+
+.application-card h3 {
+    margin-top: 70px;
+
+    font-size: 1.8rem;
+}
+
+.application-card p {
+    max-width: 500px;
+
+    margin-top: 12px;
+
+    color: #8c968a;
+}
+
+
+/* =========================================================
+   19. ENGINEERING
+   ========================================================= */
+
+.engineering-section {
+    background: #111712;
+}
+
+.engineering-layout {
+    display: grid;
+    grid-template-columns: 1fr 0.85fr;
+
+    gap: 70px;
+
+    align-items: center;
+}
+
+.engineering-list {
+    margin-top: 55px;
+}
+
+.engineering-item {
+    display: grid;
+    grid-template-columns: 55px 1fr;
+
+    gap: 20px;
+
+    padding: 25px 0;
+
+    border-top: 1px solid rgba(255, 255, 255, 0.09);
+}
+
+.engineering-item > span {
+    font-family: monospace;
+    font-size: 0.68rem;
+
+    color: #a8df73;
+}
+
+.engineering-item h3 {
+    font-size: 1.3rem;
+}
+
+.engineering-item p {
+    max-width: 620px;
+
+    margin-top: 6px;
+
+    color: #858f83;
+}
+
+.engineering-photo {
+    overflow: hidden;
+
+    background: #0b100c;
+
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.engineering-photo img {
+    width: 100%;
+    height: 650px;
+
+    display: block;
+
+    object-fit: cover;
+}
+
+.engineering-photo figcaption {
+    padding: 13px 16px;
+
+    font-family: monospace;
+    font-size: 0.63rem;
+    letter-spacing: 0.05em;
+
+    color: #687267;
+}
+
+
+/* =========================================================
+   20. TECH STACK
+   ========================================================= */
+
+.tech-stack {
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 9px;
+
+    margin-top: 55px;
+}
+
+.tech-stack span {
+    padding: 8px 13px;
+
+    border: 1px solid rgba(168, 223, 115, 0.2);
+
+    font-family: monospace;
+    font-size: 0.67rem;
+
+    color: #a8df73;
+}
+
+
+/* =========================================================
+   21. PROTOTYPE GALLERY
+   ========================================================= */
+
+.prototype-section {
+    background: #090d0a;
+}
+
+.photo-grid {
+    display: grid;
+    grid-template-columns: 1.35fr 1fr;
+    grid-template-rows: repeat(2, minmax(300px, auto));
+
+    gap: 18px;
+
+    margin-top: 60px;
+}
+
+.photo-grid figure {
+    overflow: hidden;
+
+    background: #101611;
+
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.photo-grid .photo-large {
+    grid-row: 1 / span 2;
+}
+
+.photo-grid img {
+    width: 100%;
+    height: 330px;
+
+    display: block;
+
+    object-fit: cover;
+
+    transition: transform 0.55s ease;
+}
+
+.photo-grid .photo-large img {
+    height: 710px;
+}
+
+.photo-grid figure:hover img {
+    transform: scale(1.015);
+}
+
+.photo-grid figcaption {
+    padding: 14px 16px;
+
+    font-family: monospace;
+    font-size: 0.65rem;
+
+    color: #727c71;
+}
+
+.photo-grid figcaption span {
+    display: block;
+
+    margin-bottom: 3px;
+
+    color: #a8df73;
+}
+
+
+/* =========================================================
+   22. TEAM / PROJECT ORIGIN
+   ========================================================= */
+
+.team-section {
+    display: grid;
+    grid-template-columns: 1fr 0.75fr;
+
+    gap: 90px;
+
+    align-items: center;
+
+    background: #101611;
+}
+
+.team-information {
+    color: #8d978b;
+}
+
+.team-lead {
+    margin-bottom: 20px;
+
+    font-size: 1.08rem;
+    line-height: 1.8;
+
+    color: #b0b8ad;
+}
+
+.team-information > p:not(.team-lead) {
+    line-height: 1.8;
+}
+
+.team-badge {
+    margin-top: 40px;
+
+    padding: 26px;
+
+    display: flex;
+    flex-direction: column;
+
+    background: rgba(168, 223, 115, 0.025);
+
+    border: 1px solid rgba(168, 223, 115, 0.2);
+}
+
+.team-badge span {
+    font-family: monospace;
+    font-size: 0.63rem;
+    letter-spacing: 0.12em;
+
+    color: #a8df73;
+}
+
+.team-badge strong {
+    margin-top: 5px;
+
+    font-size: 1.5rem;
+    letter-spacing: 0.06em;
+
+    color: #edf2e9;
+}
+
+.team-badge small {
+    margin-top: 2px;
+
+    color: #697368;
+}
+
+
+/* =========================================================
+   23. FINAL CTA
+   ========================================================= */
+
+.final-section {
+    min-height: 650px;
+
+    padding: 130px 6%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+
+    background:
+        radial-gradient(
+            circle at 75% 50%,
+            rgba(168, 223, 115, 0.12),
+            transparent 35%
+        ),
+        #080c09;
+
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.final-section .eyebrow {
+    margin-bottom: 25px;
+}
+
+.final-section h2 {
+    max-width: 900px;
+}
+
+.final-section > p:not(.eyebrow) {
+    max-width: 590px;
+
+    margin-top: 30px;
+
+    color: #8c968a;
+}
+
+.final-section .button {
+    margin-top: 35px;
+}
+
+
+/* =========================================================
+   24. FOOTER
+   ========================================================= */
+
+footer {
+    padding: 45px 6%;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+
+    gap: 30px;
+
+    align-items: end;
+
+    background: #060907;
+
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.footer-brand strong {
+    font-size: 0.9rem;
+    letter-spacing: 0.14em;
+}
+
+.footer-brand strong span {
+    color: #a8df73;
+}
+
+.footer-brand p,
+.footer-project,
+.footer-location {
+    margin-top: 4px;
+
+    font-size: 0.72rem;
+
+    color: #626b61;
+}
+
+.footer-project {
+    display: flex;
+    flex-direction: column;
+
+    text-align: center;
+}
+
+.footer-location {
+    display: flex;
+    flex-direction: column;
+
+    text-align: right;
+}
+
+
+/* =========================================================
+   25. RESPONSIVE — LARGE TABLETS
+   ========================================================= */
+
+@media (max-width: 1150px) {
+
+    .hero {
+        grid-template-columns: 1fr;
+
+        min-height: auto;
+    }
+
+    .hero-content {
+        max-width: 900px;
+    }
+
+    .hero-photo img {
+        height: auto;
+        max-height: 750px;
+
+        object-fit: contain;
+    }
+
+    .architecture-flow {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .architecture-arrow {
+        display: none;
+    }
+
+    .engineering-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .engineering-photo img {
+        height: auto;
+        max-height: 700px;
+
+        object-fit: contain;
+    }
+}
+
+
+/* =========================================================
+   26. RESPONSIVE — TABLETS
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    .problem-section,
+    .team-section {
+        grid-template-columns: 1fr;
+
+        gap: 45px;
+    }
+
+    .zone-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .radio-specifications {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .radio-specifications div:nth-child(2) {
+        border-right: none;
+    }
+
+    .radio-specifications div:nth-child(-n+2) {
+        border-bottom: 1px solid rgba(168, 223, 115, 0.13);
+    }
+
+    .photo-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+    }
+
+    .photo-grid .photo-large {
+        grid-row: auto;
+    }
+
+    .photo-grid img,
+    .photo-grid .photo-large img {
+        height: auto;
+        max-height: 750px;
+
+        object-fit: contain;
+    }
+}
+
+
+/* =========================================================
+   27. RESPONSIVE — MOBILE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+    .navbar {
+        height: 70px;
+
+        padding: 0 5%;
+    }
+
+    .nav-links {
+        display: none;
+    }
+
+    .hero {
+        padding:
+            115px 5%
+            70px;
+
+        gap: 45px;
+    }
+
+    .hero h1 {
+        font-size: 3.55rem;
+    }
+
+    .hero-description {
+        font-size: 0.98rem;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .hero-stats {
+        gap: 25px;
+    }
+
+    .photo-caption {
+        flex-direction: column;
+
+        gap: 2px;
+    }
+
+    .identity-strip {
+        padding: 35px 5%;
+
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .identity-logos {
+        width: 100%;
+
+        justify-content: flex-start;
+
+        gap: 18px;
+    }
+
+    .logo-box {
+        min-width: 0;
+        max-width: 140px;
+    }
+
+    .logo-box img {
+        max-height: 50px;
+    }
+
+    .logo-divider {
+        height: 45px;
+    }
+
+    .section {
+        padding:
+            90px 5%;
+    }
+
+    .section h2,
+    .final-section h2 {
+        font-size: 3rem;
+    }
+
+    .application-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .architecture-flow {
+        grid-template-columns: 1fr;
+    }
+
+    .architecture-card {
+        min-height: 260px;
+    }
+
+    .receiver {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .receiver-radio {
+        align-items: flex-start;
+    }
+
+    .thresholds {
+        flex-direction: column;
+
+        gap: 7px;
+    }
+
+    .radio-specifications {
+        grid-template-columns: 1fr;
+    }
+
+    .radio-specifications div,
+    .radio-specifications div:nth-child(2) {
+        border-right: none;
+        border-bottom: 1px solid rgba(168, 223, 115, 0.13);
+    }
+
+    .radio-specifications div:last-child {
+        border-bottom: none;
+    }
+
+    .engineering-item {
+        grid-template-columns: 40px 1fr;
+    }
+
+    .final-section {
+        min-height: 550px;
+
+        padding:
+            100px 5%;
+    }
+
+    footer {
+        grid-template-columns: 1fr;
+
+        gap: 20px;
+    }
+
+    .footer-project,
+    .footer-location {
+        text-align: left;
+    }
+}
+
+
+/* =========================================================
+   28. VERY SMALL SCREENS
+   ========================================================= */
+
+@media (max-width: 420px) {
+
+    .hero h1 {
+        font-size: 3rem;
+    }
+
+    .section h2,
+    .final-section h2 {
+        font-size: 2.6rem;
+    }
+
+    .zone-card {
+        padding: 24px;
+    }
+
+    .temperature {
+        font-size: 4rem;
+    }
+
+    .identity-logos {
+        flex-wrap: wrap;
+    }
+}
